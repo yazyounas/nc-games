@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./Components/global_components/Header";
-import Home from "./Components/pages/Home";
-import IndividualReview from "./Components/pages/IndividualReview";
+import Home from "./Components/home_components/Home";
+import IndividualReview from "./Components/home_components/IndividualReview";
 
 
 function App() {

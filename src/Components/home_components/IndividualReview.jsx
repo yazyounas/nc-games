@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getReviewById } from "../home_components/api";
+import { getReviewById } from "./api";
 
 function IndividualReview() {
   const { review_id } = useParams();

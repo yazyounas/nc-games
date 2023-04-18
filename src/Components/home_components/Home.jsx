@@ -1,4 +1,4 @@
-import ReviewLists from "../home_components/ReviewLists";
+import ReviewLists from "./ReviewLists";
 
 
 function Home() {
