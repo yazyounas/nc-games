@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getReviewById, getCommentByReviewId } from "./api";
+import CommentCard from "./CommentCard";
 
 function IndividualReview() {
   const { review_id } = useParams();
@@ -40,12 +41,8 @@ function IndividualReview() {
       </div>
       <h3>Comments:</h3>
       {comments.map((comment) => (
-        <div key={comment.comment_id} className="comment-card">
-          <p>{comment.body}</p>
-          <p>By {comment.author}</p>
-          <p>Votes{comment.votes}</p>
-          <p>Date {new Date(comment.created_at).toLocaleDateString()}</p>
-        </div>
+        <CommentCard key={comment.comment_id} className="comment-card" comment={comment} />
+         
       ))}
     </div>
   );
