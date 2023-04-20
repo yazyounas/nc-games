@@ -18,6 +18,7 @@ function LikeSection({ review_id, votes }) {
       .catch((err) => {
         setErr(
           "Failed to update vote count. Please check your internet connection and try again later"
+          
         );
       });
   };
