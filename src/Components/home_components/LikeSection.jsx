@@ -6,12 +6,14 @@ function LikeSection({ review_id, votes }) {
   const [clicked, setClicked] = useState(false);
   const [currentVotes, setCurrentVotes] = useState(votes);
   const [err, setErr] = useState(" ");
+
   const handleLike = () => {
-    updatesVoteByID(review_id, "up")
+    setClicked(true);
+    setCurrentVotes((currentVotes) => currentVotes + 1);
+    setErr(null);
+    updatesVoteByID(review_id)
       .then(() => {
         setShowButton(false);
-        setClicked(true);
-        setCurrentVotes(votes + 1);
       })
       .catch((err) => {
         setErr(
