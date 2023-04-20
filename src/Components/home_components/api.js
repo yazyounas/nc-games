@@ -30,3 +30,12 @@ export const updatesVoteByID = (review_id, newVotesCount) => {
       return data.review;
     });
 };
+
+export const postComment = (review_id, commentData) => {
+  return gameAPI
+    .post(`/reviews/${review_id}/comments`, commentData)
+
+    .then(({ data }) => {
+      return data.comment;
+    });
+};
