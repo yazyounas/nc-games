@@ -13,7 +13,6 @@ function IndividualReview() {
   useEffect(() => {
     setIsLoading(true);
     getReviewById(review_id).then((selectReview) => {
-      console.log(selectReview);
       setSelectReview(selectReview);
 
       setIsLoading(false);
@@ -41,10 +40,8 @@ function IndividualReview() {
         <p>Date {new Date(selectReview.created_at).toLocaleDateString()}</p>
         <p>Category: {selectReview.category}</p>
         <p>{selectReview.review_body}</p>
-       
 
         <LikeSection review_id={review_id} votes={selectReview.votes} />
-        
       </div>
       <h3>Comments:</h3>
       {comments.map((comment) => (
