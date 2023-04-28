@@ -1,44 +1,43 @@
 import { useState } from "react";
 import { postComment } from "./api";
 
+
 function PostComment({ review_id, setComments }) {
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
+  const [user, setUser] = useState(null);
   const [message, setMessage] = useState("");
-  const [clicked, setClicked] = useState(false)
+  const [clicked, setClicked] = useState(false);
   const [error, setError] = useState("");
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
-   
+
     const newComment = {
       body: body,
-      author: author,
+      author: user ? user.username : "Anonymous",
     };
+
     setClicked(true);
     postComment(review_id, newComment)
-    
       .then((addComment) => {
-        
-        
         setComments((prevComments) => [addComment, ...prevComments]);
         setError(null);
         setMessage("Comment posted successfully!");
         setBody("");
-        setAuthor("");
         setClicked(false);
-     
-        
       })
       .catch((error) => {
         setError("Error posting comment. Please try again later.");
-        setClicked(false)
-       
-      })
-      
+        setClicked(false);
+      });
+  };
 
-      
+  const handleLogin = () => {
+    setUser({ username: "jessjelly" });
+  };
+
+  const handleLogout = () => {
+    setUser(null);
   };
 
   return (
@@ -59,16 +58,22 @@ function PostComment({ review_id, setComments }) {
         </div>
         <div className="form-group">
           <label htmlFor="author">Username:</label>
-          <input
-            type="text"
-            id="author"
-            name="author"
-            value={author}
-            onChange={(event) => setAuthor(event.target.value)}
-            required
-          />
+          {user ? (
+            <>
+              <span>{user.username}</span>
+              <button type="button" onClick={handleLogout}>
+                Logout
+              </button>
+            </>
+          ) : (
+            <button type="button" onClick={handleLogin}>
+              Login
+            </button>
+          )}
         </div>
-        <button type="submit" className="submit-button" disabled={clicked}>{clicked ? "Posting..." : "Post Comment"}</button>
+        <button type="submit" className="submit-button" disabled={clicked}>
+          {clicked ? "Posting..." : "Post Comment"}
+        </button>
       </form>
     </main>
   );
