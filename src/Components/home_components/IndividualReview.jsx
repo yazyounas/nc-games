@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { getReviewById, getCommentByReviewId } from "./api";
 import CommentCard from "./CommentCard";
 import LikeSection from "./LikeSection";
+import PostComment from "./PostComment";
 
 function IndividualReview() {
   const { review_id } = useParams();
@@ -14,7 +15,6 @@ function IndividualReview() {
     setIsLoading(true);
     getReviewById(review_id).then((selectReview) => {
       setSelectReview(selectReview);
-
       setIsLoading(false);
     });
     getCommentByReviewId(review_id).then((comments) => {
@@ -42,15 +42,16 @@ function IndividualReview() {
         <p>{selectReview.review_body}</p>
 
         <LikeSection review_id={review_id} votes={selectReview.votes} />
+        <PostComment review_id={review_id} setComments={setComments} />
+
+        {comments.map((comment) => (
+          <CommentCard
+            key={comment.comment_id}
+            className="comment-card"
+            comment={comment}
+          />
+        ))}
       </div>
-      <h3>Comments:</h3>
-      {comments.map((comment) => (
-        <CommentCard
-          key={comment.comment_id}
-          className="comment-card"
-          comment={comment}
-        />
-      ))}
     </div>
   );
 }

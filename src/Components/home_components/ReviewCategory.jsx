@@ -1,6 +1,0 @@
-function ReviewCategory () {
-    return (
-        <>
-        </>
-    )
-}
