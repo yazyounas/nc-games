@@ -1,11 +1,11 @@
 
-import ReviewCategory from "./ReviewCategory";
+import ReviewLists from "./ReviewLists";
 
 
-function Home({items, setItems}) {
+function Home() {
     return (
         <main className="home">
-          <ReviewCategory items={items} setItems={setItems}/>
+          <ReviewLists />
           
         </main>
     )
